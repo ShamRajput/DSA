@@ -54,7 +54,7 @@ void setMatrixZero2(std::vector<std::vector<int>>&  matrix)
 void setMatrixZero(std::vector<std::vector<int>>&  matrix)
 {
 
-    ///complexity of N*M + N^2
+    ///complexity of N*M + N*M
     // space complexity N
 
     
@@ -81,11 +81,55 @@ void setMatrixZero(std::vector<std::vector<int>>&  matrix)
     }
 }
 
+
+void setMatrixZero3(std::vector<std::vector<int>>&  matrix)
+{
+
+    int col0 = 1;
+    for (size_t i = 0; i < matrix.size(); i++)
+    {
+        for (size_t j = 0; j < matrix[i].size(); j++)
+        {
+            if(matrix[i][j]==0)
+            {
+                matrix[i][0] = 0;
+                if(j==0)
+                    col0 = 0;
+                else
+                    matrix[0][j] =0;
+            }
+        }
+    }
+
+    for (size_t i = 1; i < matrix.size(); i++)
+    {
+        for (size_t j = 1; j < matrix[i].size(); j++)
+        {
+            if(matrix[i][0]==0 || 0==matrix[0][1])
+            {
+                matrix[i][j] = 0;
+            }
+
+        }
+    }
+
+    if(matrix[0][0]==0)
+    for (size_t j = 0; j < matrix[0].size(); j++)
+         matrix[0][j] =0;
+
+    if(col0 ==0)
+    {
+        for (size_t j = 0; j < matrix[0].size(); j++)
+         matrix[j][0] =0;
+    }
+}
+
 int main(int, char**){
     std::cout << "Hello, from MatrixZero!\n";
 
     std::vector<std::vector<int>> matrix{{1,1,1},{1,0,1}, {1,1,0}};
-    std::vector<std::vector<int>> matrix1{{1,1,1},{1,0,1}, {1,1,1}};
+    std::vector<std::vector<int>> matrix2{{1,1,1},{1,0,1}, {1,1,0}};
+    std::vector<std::vector<int>> matrix1{{1,1,1},{1,0,1}, {1,1,0}};
     for(auto i=0;i<matrix.size();++i)
     {
         for (auto j = 0; j < matrix[i].size(); ++j)
@@ -109,6 +153,19 @@ int main(int, char**){
     std::cout << "after setting matrix to 0 optimized approach" << std::endl;
     matrix = matrix1;
     setMatrixZero2(matrix);
+    for(auto i=0;i<matrix.size();++i)
+    {
+        for (auto j = 0; j < matrix[i].size(); ++j)
+        {
+            std::cout << matrix[i][j] << " "; 
+        }
+        std::cout << std::endl;
+        
+    }
+    matrix = matrix2;
+    std::cout << "Optimimal approach" << std::endl;
+
+    setMatrixZero3(matrix);
     for(auto i=0;i<matrix.size();++i)
     {
         for (auto j = 0; j < matrix[i].size(); ++j)

@@ -92,43 +92,50 @@ void setMatrixZero3(std::vector<std::vector<int>>&  matrix)
         {
             if(matrix[i][j]==0)
             {
-                matrix[i][0] = 0;
-                if(j==0)
-                    col0 = 0;
+                matrix[i][0] = 0; // row
+                if(j!=0)
+                    matrix[0][j] =0; 
                 else
-                    matrix[0][j] =0;
+                    col0 = 0;
             }
         }
     }
+
 
     for (size_t i = 1; i < matrix.size(); i++)
     {
         for (size_t j = 1; j < matrix[i].size(); j++)
         {
-            if(matrix[i][0]==0 || 0==matrix[0][1])
+            if (matrix[i][j] != 0)
             {
-                matrix[i][j] = 0;
+                if(matrix[i][0]==0 || 0==matrix[0][j])
+                {
+                    matrix[i][j] = 0;
+                }
             }
 
         }
     }
 
     if(matrix[0][0]==0)
-    for (size_t j = 0; j < matrix[0].size(); j++)
-         matrix[0][j] =0;
-
+    {
+        for (size_t j = 0; j < matrix.size(); j++)
+             matrix[0][j] =0;
+    }
     if(col0 ==0)
     {
         for (size_t j = 0; j < matrix[0].size(); j++)
          matrix[j][0] =0;
     }
+
+
 }
 
 int main(int, char**){
     std::cout << "Hello, from MatrixZero!\n";
 
     std::vector<std::vector<int>> matrix{{1,1,1},{1,0,1}, {1,1,0}};
-    std::vector<std::vector<int>> matrix2{{1,1,1},{1,0,1}, {1,1,0}};
+    std::vector<std::vector<int>> matrix2{{1,2,3,4},{5,0,7,8},{0,10,11,12},{13,14,15,0}};
     std::vector<std::vector<int>> matrix1{{1,1,1},{1,0,1}, {1,1,0}};
     for(auto i=0;i<matrix.size();++i)
     {
